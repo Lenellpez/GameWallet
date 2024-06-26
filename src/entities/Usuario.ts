@@ -19,4 +19,11 @@ export class Usuario extends BaseEntity{
 
     @CreateDateColumn()
     creacion: Date;
+
+    @Column()
+    rol: string;
+
+    //@OneToOne( () => Profile)
+    //@JoinColumn()
+    //profile : Profile
 }
