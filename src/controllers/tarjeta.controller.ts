@@ -4,8 +4,13 @@ import { Transaccion } from "../entities/Transaccion";
 
 export const getTarjetas = async (req: Request, res: Response) => {
     try {
-        const tarjetas = await Tarjeta.find();
+        const tarjetas = await Tarjeta.find({
+          relations : {
+            transacciones:true,     //muestra las las trasnsciones de c/tarjeta
+          }
+       });
         console.log('tarjetas: -->'), tarjetas;
+        
         return res.json(tarjetas);
     } catch (error) {
         if (error instanceof Error) {
@@ -15,9 +20,9 @@ export const getTarjetas = async (req: Request, res: Response) => {
 }
 
 export const registrarTarjeta = async (req: Request, res: Response) => {
-    const { saldo } = req.body;
+    const { saldo,card_number } = req.body;
     try {
-        const nuevaTarjeta = Tarjeta.create({ saldo, transacciones: [] });
+        const nuevaTarjeta = Tarjeta.create({ saldo,card_number, transacciones: [] });
         await nuevaTarjeta.save();
         return res.json(nuevaTarjeta);
     } catch (error) {

@@ -9,6 +9,9 @@ export class Tarjeta extends BaseEntity{
     @Column()
     saldo: number;
 
+    @Column()
+    card_number: number;   
+
     @OneToMany(() => Transaccion, transaccion => transaccion.tarjeta, { cascade: true })
     transacciones: Transaccion[];
 
