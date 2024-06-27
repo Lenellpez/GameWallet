@@ -3,8 +3,8 @@ import { actualizarUsuario, borrarUsuario, getUsuarios, registrarUsuario } from 
 const router = Router();
 
 router.get("/usuarios", getUsuarios);
-router.post("/usuario", registrarUsuario);
-router.put("/usuario/:id", actualizarUsuario);
-router.delete("/usuario/:id", borrarUsuario);
+router.post("/", registrarUsuario);
+router.put("/actualizar/:id", actualizarUsuario);
+router.delete("/borrar/:id", borrarUsuario);
 
 export default router;

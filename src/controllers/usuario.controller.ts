@@ -30,14 +30,20 @@ export const registrarUsuario = async (req: Request, res: Response) => {
 
 export const actualizarUsuario = async (req: Request, res: Response) => {
     const { id } = req.params;
+    const { nombre, email, contraseña, telefono, rol } = req.body;
 
     try {
         const usuario = await Usuario.findOneBy({ id: parseInt(id) });
         if (!usuario) return res.status(404).json({ message: "Usuario no encontrado" });
 
-        await Usuario.update({ id: parseInt(id) }, req.body);
-
-        return res.sendStatus(204);
+        usuario.nombre = nombre;
+        usuario.email = email;
+        usuario.contraseña = contraseña;
+        usuario.telefono = telefono;
+        usuario.rol = rol;
+    
+        await usuario.save();
+        return res.json(usuario);
     } catch (error) {
         if (error instanceof Error) {
             return res.status(500).json({ message: error.message });

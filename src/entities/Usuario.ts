@@ -22,8 +22,4 @@ export class Usuario extends BaseEntity{
 
     @Column()
     rol: string;
-
-    //@OneToOne( () => Profile)
-    //@JoinColumn()
-    //profile : Profile
 }

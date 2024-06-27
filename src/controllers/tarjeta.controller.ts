@@ -15,7 +15,7 @@ export const getTarjetas = async (req: Request, res: Response) => {
 }
 
 export const registrarTarjeta = async (req: Request, res: Response) => {
-    const { saldo} = req.body;
+    const { saldo } = req.body;
     try {
         const nuevaTarjeta = Tarjeta.create({ saldo, transacciones: [] });
         await nuevaTarjeta.save();

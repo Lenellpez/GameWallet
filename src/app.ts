@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(morgan('dev'));
 app.use(cors());
-app.use("/api", usuarioRoutes);
+app.use("/api/usuario", usuarioRoutes);
 app.use("/api", metodoPagoRoutes);
 app.use("/api/tarjeta", tarjetaRoutes);
 app.use("/api/transaccion", transaccionRoutes);
