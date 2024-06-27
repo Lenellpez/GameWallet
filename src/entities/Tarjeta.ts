@@ -1,4 +1,5 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity,OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Transaccion } from "./Transaccion";
 
 @Entity()
 export class Tarjeta extends BaseEntity{
@@ -8,9 +9,8 @@ export class Tarjeta extends BaseEntity{
     @Column()
     saldo: number;
 
-    //hay que ver esto
-    @Column()
-    transacciones: string;
+    @OneToMany(() => Transaccion, transaccion => transaccion.tarjeta, { cascade: true })
+    transacciones: Transaccion[];
 
     @CreateDateColumn()
     creacion: Date;

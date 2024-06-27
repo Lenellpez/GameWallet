@@ -8,8 +8,8 @@ export const AppDataSource = new DataSource({
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "password123",
-    database: "pysw",
+    password: "admin",
+    database: "psw",
     synchronize: true,
     entities: [Usuario, MetodoPago, Tarjeta, Transaccion],
 });

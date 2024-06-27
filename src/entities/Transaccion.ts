@@ -1,4 +1,5 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity,ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Tarjeta } from "./Tarjeta";
 
 @Entity()
 export class Transaccion extends BaseEntity{
@@ -16,4 +17,7 @@ export class Transaccion extends BaseEntity{
 
     @Column()
     estado: string;
+
+    @ManyToOne(() => Tarjeta, tarjeta => tarjeta.transacciones)
+    tarjeta: Tarjeta;
 }

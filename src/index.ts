@@ -7,7 +7,7 @@ async function main(){
     try{
         await AppDataSource.initialize();
         console.log('Database Conected ...')
-        app.listen(port, () => console.log('App listening on port ${port}!'))
+        app.listen(port, () => console.log(`App listening on port ${port}!`))
     } catch (error) {
         console.error(error);
     }
