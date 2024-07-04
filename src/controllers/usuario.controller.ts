@@ -16,13 +16,19 @@ export const getUsuarios = async (req: Request, res: Response) => {
 export const registrarUsuario = async (req: Request, res: Response) => {
     const { nombre, email, contraseña, telefono, rol } = req.body;
 
+    const existeUsuario = await Usuario.findOne({ where: { nombre: nombre } });
+
+    if (existeUsuario) {
+        return res.status(400).json({ message: 'El usuario ya existe' });
+    }
+
     const usuario = new Usuario();
     usuario.nombre = nombre;
     usuario.email = email;
     usuario.contraseña = contraseña;
     usuario.telefono = telefono;
     usuario.rol = rol;
-    
+
     await usuario.save();
 
     return res.json(usuario);
@@ -41,14 +47,14 @@ export const actualizarUsuario = async (req: Request, res: Response) => {
         usuario.contraseña = contraseña;
         usuario.telefono = telefono;
         usuario.rol = rol;
-    
+
         await usuario.save();
         return res.json(usuario);
     } catch (error) {
         if (error instanceof Error) {
             return res.status(500).json({ message: error.message });
         }
-    }    
+    }
 }
 
 export const borrarUsuario = async (req: Request, res: Response) => {
@@ -74,4 +80,3 @@ export const borrarUsuario = async (req: Request, res: Response) => {
 //}
 
 */
-
