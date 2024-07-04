@@ -101,3 +101,25 @@ export const descontarSaldo = async (req: Request, res: Response) => {
     }
   };
 
+  export const getTarjeta = async (req: Request, res: Response) => {
+    // Obtener el número de tarjeta desde los parámetros de la URL
+    const { card_number } = req.params; 
+    // Convertir card_number a número
+    const cardNumber = Number(card_number);
+    if (isNaN(cardNumber)) {
+      return res.status(400).json({ message: "Número de tarjeta inválido" });
+  }
+    try {
+      const tarjeta = await Tarjeta.findOne({ where: { card_number: cardNumber }, relations: ['transacciones'] });
+
+        if (!tarjeta) {
+            return res.status(404).json({ message: "Tarjeta no encontrada" });
+        }
+
+        return res.json(tarjeta);
+    } catch (error) {
+        if (error instanceof Error) {
+            return res.status(500).json({ message: error.message });
+        }
+    }
+};
