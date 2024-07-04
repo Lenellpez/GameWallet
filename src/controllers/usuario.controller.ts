@@ -72,9 +72,30 @@ export const borrarUsuario = async (req: Request, res: Response) => {
         }
     }
 };
+
+export const LoguearUsuario = async (req: Request, res: Response) => {
+
+    const { nombre, contraseña } = req.body;
+
+    const usuario = await Usuario.findOne({ where: { nombre: nombre } });
+
+    // Verificar usuario
+    if (!usuario) {
+        return res.status(404).json({ message: `No se encontro el usuario ${nombre}` });
+    }
+
+    // Verificar contraseña
+    if (usuario.contraseña !== contraseña) {
+        return res.status(401).json({ message: 'Contraseña incorrecta' });
+    }
+
+    return res.json({
+        message: 'Login exitoso!',
+        usuario: usuario,
+    });
+};
+
 /*
-//export const LoguearUsuario = async (req: Request, res: Response) => {
-//}
 
 //export const AutentificarUsuario = async (req: Request, res: Response) => {
 //}
