@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import {getDolarBlu} from '../controllers/dolar.controller'; 
+import { getDolar } from '../controllers/dolar.controller';
 
 const router = Router();
-router.get('/blu', getDolarBlu); 
+router.get('/', getDolar);
 
 export default router;
